@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ramad Construction and Real Estate delivers premium construction, verified property listings, architectural design, and property management in Somaliland.">
+  <meta name="theme-color" content="#17130f">
+  <title>Ramad Construction and Real Estate</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/images/hero-villa.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script type="module" src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="page-loader" id="page-loader" aria-hidden="true">
+    <div class="loader-brand">
+      <span class="loader-monogram">R</span>
+      <div>
+        <strong>RAMAD</strong>
+        <small>CONSTRUCTION &amp; REAL ESTATE</small>
+      </div>
+    </div>
+    <div class="loader-track"><span></span></div>
+    <span class="loader-count">0</span>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"><span>VIEW</span></div>
+
+  <header class="site-header" id="site-header">
+    <a class="brand" href="#home" aria-label="Ramad home">
+      <span class="brand-mark">R</span>
+      <span class="brand-copy"><strong>RAMAD</strong><small>CONSTRUCTION &amp; REAL ESTATE</small></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#home">Home</a>
+      <a href="#properties">Properties</a>
+      <a href="#construction">Construction</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="button button-small button-outline magnetic header-cta" href="#contact">Schedule a Consultation</a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" inert>
+    <div class="mobile-menu-top">
+      <span class="eyebrow">Navigate</span>
+      <button class="menu-close" id="menu-close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="#home"><span>01</span>Home</a>
+      <a href="#properties"><span>02</span>Properties</a>
+      <a href="#construction"><span>03</span>Construction</a>
+      <a href="#projects"><span>04</span>Projects</a>
+      <a href="#about"><span>05</span>About</a>
+      <a href="#contact"><span>06</span>Contact</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <p>Hargeisa, Somaliland</p>
+      <a href="tel:+252630000000">+252&nbsp;63&nbsp;000&nbsp;0000</a>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-media depth-layer">
+        <img src="assets/images/hero-villa.webp" alt="Contemporary Ramad villa glowing at sunset" width="1672" height="941" fetchpriority="high">
+      </div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-overlay"></div>
+      <div class="hero-side-note">HARGEISA · SOMALILAND</div>
+
+      <div class="hero-content container">
+        <p class="eyebrow hero-kicker">CONSTRUCTION · PROPERTY · DESIGN</p>
+        <h1 id="hero-title" class="split-words">Building spaces that inspire better living.</h1>
+        <div class="hero-bottom">
+          <p>Premium construction and trusted real-estate solutions designed around your future.</p>
+          <div class="hero-actions">
+            <a class="button button-light magnetic" href="#properties">Explore Properties <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#projects">View Our Projects <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#story" aria-label="Scroll to our approach">
+        <span>SCROLL</span><i></i>
+      </a>
+    </section>
+
+    <section class="intro-section section-pad" aria-labelledby="intro-title">
+      <div class="container intro-grid">
+        <div>
+          <p class="eyebrow reveal-up">OUR APPROACH</p>
+          <span class="section-index">01</span>
+        </div>
+        <div>
+          <h2 id="intro-title" class="display-title reveal-up">From the first sketch to the final key, every decision has a purpose.</h2>
+          <p class="lead reveal-up">Ramad brings construction expertise and real-estate insight into one dependable team—creating enduring spaces and clearer property decisions across Somaliland.</p>
+          <a class="circle-link magnetic" href="#about" aria-label="Discover Ramad"><span>Discover<br>Ramad</span><i>↗</i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="story" aria-label="Our design and construction philosophy">
+      <div class="story-pin">
+        <div class="story-progress" aria-hidden="true">
+          <span class="story-count">01</span>
+          <div><i id="story-progress-line"></i></div>
+          <span>04</span>
+        </div>
+
+        <article class="story-scene active" data-scene="1">
+        <img src="assets/images/hero-villa.webp" alt="Purposefully designed luxury villa exterior" width="1672" height="941">
+        <div class="story-shade"></div>
+        <div class="story-copy"><span>01 / EXTERIOR</span><h2>Designed with purpose.</h2><p>Architecture guided by place, light, and the lives it will hold.</p></div>
+        </article>
+        <article class="story-scene" data-scene="2">
+        <img src="assets/images/luxury-interior.webp" alt="Detailed modern luxury villa interior" width="1672" height="941" loading="lazy">
+        <div class="story-shade"></div>
+        <div class="story-copy"><span>02 / INTERIOR</span><h2>Comfort shaped by detail.</h2><p>Materials, proportions, and finishes resolved with quiet confidence.</p></div>
+        </article>
+        <article class="story-scene" data-scene="3">
+        <img src="assets/images/construction-site.webp" alt="Professional construction project in progress" width="1672" height="941" loading="lazy">
+        <div class="story-shade"></div>
+        <div class="story-copy"><span>03 / BUILD</span><h2>Built with precision.</h2><p>Disciplined delivery, trusted teams, and quality at every stage.</p></div>
+        </article>
+        <article class="story-scene" data-scene="4">
+        <img src="assets/images/commercial-complex.webp" alt="Completed modern commercial property" width="1672" height="941" loading="lazy">
+        <div class="story-shade"></div>
+        <div class="story-copy"><span>04 / LEGACY</span><h2>Created to last.</h2><p>Spaces that retain their value, usefulness, and character.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="services-section section-pad" id="construction" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-heading light-heading">
+          <div><p class="eyebrow reveal-up">WHAT WE DO</p><span class="section-index">02</span></div>
+          <div><h2 id="services-title" class="display-title reveal-up">One partner. Every property possibility.</h2><p class="lead reveal-up">Integrated expertise for building, buying, renting, improving, and managing property.</p></div>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#home"></use></svg><span>01</span>
+            <h3>Residential Construction</h3><p>End-to-end family homes built around quality, comfort, and long-term value.</p>
+            <a class="service-link" href="#contact" data-service="Residential Construction">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#building"></use></svg><span>02</span>
+            <h3>Commercial Construction</h3><p>Efficient, impressive workplaces and retail spaces delivered to a clear brief.</p>
+            <a class="service-link" href="#contact" data-service="Commercial Construction">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#key"></use></svg><span>03</span>
+            <h3>Property Sales</h3><p>Verified homes and investments, presented clearly and matched to your goals.</p>
+            <a class="service-link" href="#contact" data-service="Property Sales">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#calendar"></use></svg><span>04</span>
+            <h3>Property Rentals</h3><p>Quality residential and commercial rentals with responsive local support.</p>
+            <a class="service-link" href="#contact" data-service="Property Rentals">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#plan"></use></svg><span>05</span>
+            <h3>Architectural Design</h3><p>Practical, expressive plans developed for your site, budget, and ambition.</p>
+            <a class="service-link" href="#contact" data-service="Architectural Design">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#sofa"></use></svg><span>06</span>
+            <h3>Interior Design</h3><p>Calm, cohesive interiors balancing daily function with refined material choices.</p>
+            <a class="service-link" href="#contact" data-service="Interior Design">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#tools"></use></svg><span>07</span>
+            <h3>Renovation Services</h3><p>Thoughtful upgrades that improve performance, appearance, and property value.</p>
+            <a class="service-link" href="#contact" data-service="Renovation Services">Learn More <i>↗</i></a>
+          </article>
+          <article class="service-card reveal-up">
+            <svg aria-hidden="true"><use href="assets/icons/sprite.svg#shield"></use></svg><span>08</span>
+            <h3>Property Management</h3><p>Reliable care, tenant coordination, and reporting for valuable property assets.</p>
+            <a class="service-link" href="#contact" data-service="Property Management">Learn More <i>↗</i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="properties-section section-pad" id="properties" aria-labelledby="properties-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow reveal-up">CURATED PROPERTIES</p><span class="section-index">03</span></div>
+          <div><h2 id="properties-title" class="display-title reveal-up">A better place is waiting.</h2><p class="lead reveal-up">Explore verified homes and distinctive investment opportunities selected by our local team.</p></div>
+        </div>
+
+        <form class="property-filters reveal-up" id="property-filters" aria-label="Filter properties">
+          <label>Location<select id="filter-location"><option value="all">All locations</option></select></label>
+          <label>Property type<select id="filter-type"><option value="all">All types</option></select></label>
+          <label>Minimum price<select id="filter-min"><option value="0">No minimum</option><option value="350000">$350,000</option><option value="450000">$450,000</option><option value="550000">$550,000</option></select></label>
+          <label>Maximum price<select id="filter-max"><option value="9999999">No maximum</option><option value="400000">$400,000</option><option value="550000">$550,000</option><option value="650000">$650,000</option></select></label>
+          <label>Bedrooms<select id="filter-bedrooms"><option value="0">Any bedrooms</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></label>
+          <button class="visually-hidden" type="submit">Apply property filters</button>
+          <button class="filter-reset" id="filter-reset" type="reset">Reset filters</button>
+        </form>
+
+        <div class="result-bar"><p><strong id="property-count">6</strong> residences available</p><span>Verified by Ramad</span></div>
+        <div class="properties-grid" id="properties-grid" aria-live="polite"></div>
+        <div class="empty-state" id="property-empty" hidden><span>⌁</span><h3>No exact matches</h3><p>Try widening your price, location, or bedroom filters.</p><button class="button button-dark" type="button" id="empty-reset">Show all properties</button></div>
+      </div>
+    </section>
+
+    <section class="projects-section section-pad" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="projects-heading">
+          <div><p class="eyebrow reveal-up">SELECTED WORK</p><span class="section-index">04</span></div>
+          <div><h2 id="projects-title" class="display-title reveal-up">Proof lives in the finish.</h2></div>
+          <div class="project-filters" role="group" aria-label="Filter projects">
+            <button class="active" type="button" data-project-filter="all">All</button>
+            <button type="button" data-project-filter="residential">Residential</button>
+            <button type="button" data-project-filter="commercial">Commercial</button>
+            <button type="button" data-project-filter="completed">Completed</button>
+            <button type="button" data-project-filter="ongoing">Ongoing</button>
+          </div>
+        </div>
+        <div class="projects-list" id="projects-list"></div>
+
+        <div class="comparison-block reveal-up">
+          <div class="comparison-copy"><p class="eyebrow">BEFORE / AFTER</p><h3>From structure to landmark.</h3><p>Drag the control to compare construction progress with the completed vision.</p></div>
+          <div class="comparison" id="comparison">
+            <img class="comparison-after" src="assets/images/commercial-complex.webp" alt="Completed Ramad commercial complex" width="1672" height="941" loading="lazy">
+            <div class="comparison-before" id="comparison-before"><img src="assets/images/construction-site.webp" alt="Commercial complex during construction" width="1672" height="941" loading="lazy"></div>
+            <input id="comparison-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after project images">
+            <span class="comparison-handle" id="comparison-handle" aria-hidden="true"><i>↔</i></span>
+            <span class="compare-label before-label">BUILD</span><span class="compare-label after-label">FINISH</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section section-pad" id="about" aria-labelledby="about-title">
+      <div class="about-media reveal-mask"><img src="assets/images/luxury-interior.webp" alt="A refined interior delivered by Ramad" width="1672" height="941" loading="lazy"></div>
+      <div class="container about-grid">
+        <div><p class="eyebrow reveal-up">ABOUT RAMAD</p><span class="section-index">05</span></div>
+        <div class="about-copy">
+          <h2 id="about-title" class="display-title reveal-up">Construction quality. Real-estate confidence.</h2>
+          <p class="lead reveal-up">Ramad Construction and Real Estate provides dependable construction and property solutions for homeowners, investors, and businesses. Our team combines disciplined project delivery with honest local-market advice, so every client moves forward with clarity.</p>
+          <p class="reveal-up">From feasibility and architectural planning to handover, sale, lease, and ongoing management, we stay accountable to the detail—and to you.</p>
+        </div>
+        <div class="stats" role="group" aria-label="Company statistics">
+          <div><strong data-count="12" data-suffix="+">0</strong><span>Years of experience</span></div>
+          <div><strong data-count="86" data-suffix="+">0</strong><span>Completed projects</span></div>
+          <div><strong data-count="140" data-suffix="+">0</strong><span>Properties listed</span></div>
+          <div><strong data-count="240" data-suffix="+">0</strong><span>Happy clients</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-section section-pad" aria-labelledby="why-title">
+      <div class="container why-grid">
+        <div class="why-sticky"><p class="eyebrow">WHY RAMAD</p><h2 id="why-title" class="display-title">Built on clarity.<br>Known for quality.</h2><p>Six commitments behind every project and property relationship.</p></div>
+        <ol class="why-list">
+          <li class="reveal-up"><span>01</span><div><h3>Professional construction team</h3><p>Experienced project leadership and skilled site coordination.</p></div></li>
+          <li class="reveal-up"><span>02</span><div><h3>Verified property listings</h3><p>Property details reviewed before they reach your shortlist.</p></div></li>
+          <li class="reveal-up"><span>03</span><div><h3>High-quality materials</h3><p>Selections guided by durability, performance, and finish.</p></div></li>
+          <li class="reveal-up"><span>04</span><div><h3>Transparent pricing</h3><p>Clear scopes, documented decisions, and fewer surprises.</p></div></li>
+          <li class="reveal-up"><span>05</span><div><h3>On-time project delivery</h3><p>Structured programmes and honest milestone reporting.</p></div></li>
+          <li class="reveal-up"><span>06</span><div><h3>Local market expertise</h3><p>Grounded advice for Somaliland's property landscape.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact-section section-pad" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-intro"><p class="eyebrow reveal-up">START A CONVERSATION</p><h2 id="contact-title" class="contact-title reveal-up">Let’s create something <em>worth keeping.</em></h2></div>
+        <div class="contact-grid">
+          <form class="consultation-form" id="consultation-form" novalidate>
+            <div class="field-row">
+              <label class="field"><span>Full name *</span><input id="full-name" name="name" type="text" autocomplete="name" required placeholder="Your full name"><small class="field-error"></small></label>
+              <label class="field"><span>Phone number *</span><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="+252 63 000 0000"><small class="field-error"></small></label>
+            </div>
+            <div class="field-row">
+              <label class="field"><span>Email address *</span><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><small class="field-error"></small></label>
+              <label class="field"><span>Service required *</span><select id="service" name="service" required><option value="">Select a service</option><option>Residential Construction</option><option>Commercial Construction</option><option>Property Sales</option><option>Property Rentals</option><option>Property Viewing</option><option>Architectural Design</option><option>Interior Design</option><option>Renovation Services</option><option>Property Management</option><option>Real-estate Consultation</option></select><small class="field-error"></small></label>
+            </div>
+            <label class="field"><span>Preferred date *</span><input id="preferred-date" name="date" type="date" required><small class="field-error"></small></label>
+            <label class="field"><span>Message *</span><textarea id="message" name="message" rows="4" required minlength="12" placeholder="Tell us about your project or property needs"></textarea><small class="field-error"></small></label>
+            <button class="button button-gold magnetic submit-button" type="submit"><span>Send Consultation Request</span><i>↗</i></button>
+            <div class="form-success" id="form-success" role="status" aria-live="polite"><strong>Thank you.</strong><span>Your request has been recorded. The Ramad team will contact you shortly.</span></div>
+          </form>
+
+          <aside class="contact-aside">
+            <div class="contact-card"><span class="eyebrow">DIRECT CONTACT</span><a href="tel:+252630000000">+252&nbsp;63&nbsp;000&nbsp;0000</a><a href="mailto:hello@ramad.so">hello@ramad.so</a><p>Sha'ab Area<br>Hargeisa, Somaliland</p><a class="whatsapp-button" href="https://wa.me/252630000000?text=Hello%20Ramad%2C%20I%20would%20like%20a%20consultation." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="assets/icons/sprite.svg#message"></use></svg>Chat on WhatsApp</a></div>
+            <section class="map-card" id="map-card" aria-label="Ramad office map preview">
+              <div class="map-grid"></div><div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-pin"><span>R</span><i>RAMAD OFFICE</i></div>
+              <div class="map-controls"><button type="button" data-map-zoom="in" aria-label="Zoom map in">+</button><button type="button" data-map-zoom="out" aria-label="Zoom map out">−</button></div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Hargeisa%2C%20Somaliland" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="brand" href="#home"><span class="brand-mark">R</span><span class="brand-copy"><strong>RAMAD</strong><small>CONSTRUCTION &amp; REAL ESTATE</small></span></a><p>Creating dependable buildings and confident property decisions across Somaliland.</p></div>
+        <div><h3>Explore</h3><a href="#home">Home</a><a href="#properties">Properties</a><a href="#projects">Projects</a><a href="#about">About</a></div>
+        <div><h3>Services</h3><a href="#construction">Construction</a><a href="#construction">Property Sales</a><a href="#construction">Architecture</a><a href="#construction">Management</a></div>
+        <div><h3>Contact</h3><a href="tel:+252630000000">+252&nbsp;63&nbsp;000&nbsp;0000</a><a href="mailto:hello@ramad.so">hello@ramad.so</a><p>Hargeisa, Somaliland</p></div>
+      </div>
+      <div class="footer-bottom"><p>© <span id="current-year">2026</span> Ramad Construction and Real Estate. All rights reserved.</p><div><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></div><button class="back-top" id="back-top" type="button" aria-label="Back to top">↑</button></div>
+    </div>
+  </footer>
+
+  <dialog class="property-modal" id="property-modal" aria-labelledby="modal-property-title">
+    <div class="modal-shell">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close property details">&times;</button>
+      <div class="modal-gallery">
+        <img id="modal-image" src="assets/images/hero-villa.webp" alt="" width="1672" height="941">
+        <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image">←</button>
+        <button class="gallery-nav gallery-next" type="button" aria-label="Next image">→</button>
+        <span class="gallery-count" id="gallery-count">01 / 03</span>
+        <div class="gallery-dots" id="gallery-dots" role="group" aria-label="Choose gallery image"></div>
+      </div>
+      <div class="modal-details">
+        <div class="modal-heading"><div><span class="property-status" id="modal-status">FOR SALE</span><h2 id="modal-property-title">Property</h2><p id="modal-location">Hargeisa, Somaliland</p></div><strong id="modal-price">$0</strong></div>
+        <p class="modal-description" id="modal-description"></p>
+        <dl class="property-specs modal-specs">
+          <div><dt>Bedrooms</dt><dd id="modal-bedrooms">0</dd></div><div><dt>Bathrooms</dt><dd id="modal-bathrooms">0</dd></div><div><dt>Garage</dt><dd id="modal-garage">0</dd></div><div><dt>Area</dt><dd id="modal-area">0 m²</dd></div>
+        </dl>
+        <div class="amenities"><h3>Amenities</h3><ul id="modal-amenities"></ul></div>
+        <div class="agent-card"><div class="agent-avatar">MA</div><div><span>Property advisor</span><strong>Mahad Ahmed</strong><a href="tel:+252630000000">+252&nbsp;63&nbsp;000&nbsp;0000</a></div></div>
+        <div class="modal-actions"><a class="button button-whatsapp" id="modal-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp Inquiry</a><button class="button button-dark" id="schedule-viewing" type="button">Schedule Viewing</button></div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
