@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ramad-construction-real-estate.vercel.app/sitemap.xml

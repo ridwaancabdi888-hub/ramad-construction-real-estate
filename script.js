@@ -16,153 +16,8 @@ const images = {
   commercial: "assets/images/commercial-complex.webp"
 };
 
-const properties = [
-  {
-    id: 1,
-    name: "Ramad Palm Residence",
-    location: "Hargeisa, Somaliland",
-    locationFilter: "Hargeisa",
-    price: 485000,
-    bedrooms: 4,
-    bathrooms: 4,
-    garage: 2,
-    area: 420,
-    type: "Villa",
-    status: "For Sale",
-    image: images.hero,
-    gallery: [images.hero, images.interior, images.commercial],
-    description: "A calm, contemporary villa arranged around light, landscape, and an elegant private pool. Generous family areas, shaded outdoor living, and durable finishes make this a distinctive Hargeisa residence.",
-    amenities: ["Private pool", "Landscaped courtyard", "Smart security", "Maid's room", "Backup water system", "Fitted kitchen"]
-  },
-  {
-    id: 2,
-    name: "Skyline Modern Villa",
-    location: "New Hargeisa",
-    locationFilter: "New Hargeisa",
-    price: 620000,
-    bedrooms: 5,
-    bathrooms: 5,
-    garage: 3,
-    area: 560,
-    type: "Luxury Villa",
-    status: "For Sale",
-    image: images.interior,
-    gallery: [images.interior, images.hero, images.commercial],
-    description: "A generous modern home with flowing entertaining spaces, considered natural materials, and a private courtyard at its heart. Designed for refined family living with strong indoor-outdoor connections.",
-    amenities: ["Five en-suite rooms", "Family lounge", "Private garden", "Three-car garage", "Solar provision", "Walk-in wardrobes"]
-  },
-  {
-    id: 3,
-    name: "Golden Hills Residence",
-    location: "Jigjiga Yar",
-    locationFilter: "Jigjiga Yar",
-    price: 390000,
-    bedrooms: 3,
-    bathrooms: 3,
-    garage: 1,
-    area: 315,
-    type: "Residence",
-    status: "For Sale",
-    image: images.commercial,
-    gallery: [images.commercial, images.interior, images.hero],
-    description: "A light-filled urban residence with a clean contemporary façade and efficient family plan. Secure, low-maintenance, and well connected to central Hargeisa amenities.",
-    amenities: ["Rooftop terrace", "Secure parking", "Modern kitchen", "Guest suite", "Water storage", "Perimeter security"]
-  },
-  {
-    id: 4,
-    name: "Horizon Family Villa",
-    location: "Masalaha",
-    locationFilter: "Masalaha",
-    price: 710000,
-    bedrooms: 6,
-    bathrooms: 6,
-    garage: 3,
-    area: 680,
-    type: "Luxury Villa",
-    status: "For Sale",
-    image: images.hero,
-    gallery: [images.hero, images.commercial, images.interior],
-    description: "An expansive family estate combining privacy, hospitality, and exceptional outdoor space. The home offers flexible living zones and a robust material palette selected for lasting performance.",
-    amenities: ["Six en-suite rooms", "Swimming pool", "Formal majlis", "Outdoor kitchen", "Staff quarters", "Three-car garage"]
-  },
-  {
-    id: 5,
-    name: "Green Valley Home",
-    location: "Borama",
-    locationFilter: "Borama",
-    price: 350000,
-    bedrooms: 4,
-    bathrooms: 3,
-    garage: 2,
-    area: 370,
-    type: "Family Home",
-    status: "For Sale",
-    image: images.interior,
-    gallery: [images.interior, images.hero, images.construction],
-    description: "A welcoming four-bedroom home created for relaxed family routines. Warm interiors, shaded garden areas, and a practical service wing balance comfort with everyday efficiency.",
-    amenities: ["Family garden", "Two-car garage", "Study", "Pantry", "Guest bedroom", "Water reserve"]
-  },
-  {
-    id: 6,
-    name: "Coastal Luxury Retreat",
-    location: "Berbera",
-    locationFilter: "Berbera",
-    price: 540000,
-    bedrooms: 4,
-    bathrooms: 4,
-    garage: 2,
-    area: 460,
-    type: "Coastal Villa",
-    status: "For Sale",
-    image: images.commercial,
-    gallery: [images.commercial, images.hero, images.interior],
-    description: "A private coastal retreat planned for shade, sea breeze, and uninterrupted rest. The architecture pairs calm limestone tones with generous terraces and flexible guest accommodation.",
-    amenities: ["Sea outlook", "Shaded terraces", "Private courtyard", "Guest pavilion", "Solar system", "Secure parking"]
-  }
-];
-
-const projects = [
-  {
-    id: 1,
-    title: "Ramad Courtyard House",
-    location: "New Hargeisa",
-    type: "Residential",
-    status: "Completed",
-    date: "2026",
-    image: images.hero,
-    description: "A private family residence shaped around a central courtyard, controlled light, and year-round outdoor living."
-  },
-  {
-    id: 2,
-    title: "Jigjiga Road Business Centre",
-    location: "Hargeisa",
-    type: "Commercial",
-    status: "Completed",
-    date: "2025",
-    image: images.commercial,
-    description: "A flexible mixed-use destination with a strong civic presence, efficient floorplates, and durable public spaces."
-  },
-  {
-    id: 3,
-    title: "Masalaha Family Estate",
-    location: "Masalaha",
-    type: "Residential",
-    status: "Ongoing",
-    date: "72% progress",
-    image: images.construction,
-    description: "A six-bedroom estate currently progressing through structural and envelope works under Ramad site management."
-  },
-  {
-    id: 4,
-    title: "Ramad Workplace Interior",
-    location: "Hargeisa CBD",
-    type: "Commercial",
-    status: "Completed",
-    date: "2026",
-    image: images.interior,
-    description: "A warm, productive interior using natural stone, timber, and carefully layered lighting to create lasting character."
-  }
-];
+const properties = [];
+const projects = [];
 
 let favorites = new Set();
 try {
@@ -557,7 +412,7 @@ function openPropertyModal(property) {
   $("#modal-garage").textContent = property.garage;
   $("#modal-area").textContent = `${property.area} m²`;
   $("#modal-amenities").innerHTML = property.amenities.map(item => `<li>${item}</li>`).join("");
-  $("#modal-whatsapp").href = `https://wa.me/252630000000?text=${encodeURIComponent(`Hello Ramad, I am interested in ${property.name} (${formatPrice(property.price)}). Please share more information.`)}`;
+  $("#modal-whatsapp").href = "#";
   $("#gallery-dots").innerHTML = property.gallery.map((_, index) => `<button type="button" data-gallery-index="${index}" aria-label="View image ${index + 1}" class="${index === 0 ? "active" : ""}"></button>`).join("");
   $$("[data-gallery-index]", $("#gallery-dots")).forEach(button => button.addEventListener("click", () => updateGallery(Number(button.dataset.galleryIndex))));
   updateGallery(0);
@@ -720,7 +575,7 @@ function initForm() {
     }
     const button = $(".submit-button", form);
     button.disabled = true;
-    $("span", button).textContent = "Recording request…";
+    $("span", button).textContent = "Previewing details…";
     window.setTimeout(() => {
       form.reset();
       fields.forEach(input => {
@@ -729,9 +584,9 @@ function initForm() {
         $(".field-error", input.closest(".field")).textContent = "";
       });
       button.disabled = false;
-      $("span", button).textContent = "Send Consultation Request";
+      $("span", button).textContent = "Preview Consultation Request";
       $("#form-success").classList.add("show");
-      showToast("Consultation request recorded successfully.");
+      showToast("Demo preview completed; no request was sent.");
     }, 700);
   });
 
@@ -791,21 +646,14 @@ function initGlobalActions() {
 }
 
 splitHeroWords();
-populatePropertyFilters();
-renderProperties();
 initLoader();
 initHeaderAndNavigation();
 initThreeScene();
 initHeroDepth();
 initScrollAnimations();
 initStoryMorph();
-initPropertyFilters();
-initPropertyModal();
-initProjects();
-initComparison();
 initStats();
 initForm();
-initMap();
 initMagneticButtons();
 initCursor();
 initGlobalActions();
