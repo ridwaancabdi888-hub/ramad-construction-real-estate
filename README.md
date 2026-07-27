@@ -64,7 +64,11 @@ ES modules require the site to be opened through a local HTTP server rather than
 Using Python:
 
 ```bash
-python -m http.server 8080
+# macOS or Linux
+python3 -m http.server 8080
+
+# Windows
+py -m http.server 8080
 ```
 
 Then open `http://localhost:8080`.
