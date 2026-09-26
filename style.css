@@ -391,6 +391,12 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .field input::placeholder, .field textarea::placeholder { color: #6f655b; }
 .field-error { min-height: 16px; color: #e6a098; font-size: .7rem; }
 .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #d56f64; }
+.form-errors { border-left: 3px solid #d56f64; outline: 0; padding: 18px 20px; color: #f0d7d2; background: rgba(213,111,100,.12); }
+.form-errors[hidden] { display: none; }
+.form-errors strong { display: block; color: #fff; font-family: var(--serif); font-size: 1.2rem; font-weight: 400; }
+.form-errors ul { display: grid; gap: 7px; margin: 12px 0 0; padding-left: 20px; }
+.form-errors a { color: #f0d7d2; text-decoration: underline; text-underline-offset: 3px; }
+.form-errors a:hover, .form-errors a:focus-visible { color: #fff; }
 .submit-button { width: max-content; margin-top: 15px; }
 .form-success { display: none; gap: 8px; border-left: 2px solid var(--gold); padding: 16px 20px; color: #cfc4b6; background: rgba(255,255,255,.05); }
 .form-success.show { display: grid; }

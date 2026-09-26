@@ -287,16 +287,17 @@
         <div class="contact-intro"><p class="eyebrow reveal-up">CONSULTATION PREVIEW</p><h2 id="contact-title" class="contact-title reveal-up">Prepare a clear <em>project brief.</em></h2><p>Direct submission is not connected yet. Use this demo form to review the details a verified Ramad contact channel should collect.</p></div>
         <div class="contact-grid">
           <form class="consultation-form" id="consultation-form" novalidate>
+            <div class="form-errors" id="form-errors" role="alert" tabindex="-1" hidden></div>
             <div class="field-row">
-              <label class="field"><span>Full name *</span><input id="full-name" name="name" type="text" autocomplete="name" required placeholder="Your full name"><small class="field-error"></small></label>
-              <label class="field"><span>Phone number *</span><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="Your phone number"><small class="field-error"></small></label>
+              <label class="field"><span>Full name *</span><input id="full-name" name="name" type="text" autocomplete="name" required aria-describedby="full-name-error" placeholder="Your full name"><small class="field-error" id="full-name-error" aria-live="polite"></small></label>
+              <label class="field"><span>Phone number *</span><input id="phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="phone-error" placeholder="Your phone number"><small class="field-error" id="phone-error" aria-live="polite"></small></label>
             </div>
             <div class="field-row">
-              <label class="field"><span>Email address *</span><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><small class="field-error"></small></label>
-              <label class="field"><span>Service required *</span><select id="service" name="service" required><option value="">Select a service</option><option>Residential Construction</option><option>Commercial Construction</option><option>Property Sales</option><option>Property Rentals</option><option>Property Viewing</option><option>Architectural Design</option><option>Interior Design</option><option>Renovation Services</option><option>Property Management</option><option>Real-estate Consultation</option></select><small class="field-error"></small></label>
+              <label class="field"><span>Email address *</span><input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error" placeholder="you@example.com"><small class="field-error" id="email-error" aria-live="polite"></small></label>
+              <label class="field"><span>Service required *</span><select id="service" name="service" required aria-describedby="service-error"><option value="">Select a service</option><option>Residential Construction</option><option>Commercial Construction</option><option>Property Sales</option><option>Property Rentals</option><option>Property Viewing</option><option>Architectural Design</option><option>Interior Design</option><option>Renovation Services</option><option>Property Management</option><option>Real-estate Consultation</option></select><small class="field-error" id="service-error" aria-live="polite"></small></label>
             </div>
-            <label class="field"><span>Preferred date *</span><input id="preferred-date" name="date" type="date" required><small class="field-error"></small></label>
-            <label class="field"><span>Message *</span><textarea id="message" name="message" rows="4" required minlength="12" placeholder="Tell us about your project or property needs"></textarea><small class="field-error"></small></label>
+            <label class="field"><span>Preferred date *</span><input id="preferred-date" name="date" type="date" required aria-describedby="preferred-date-error"><small class="field-error" id="preferred-date-error" aria-live="polite"></small></label>
+            <label class="field"><span>Message *</span><textarea id="message" name="message" rows="4" required minlength="12" aria-describedby="message-error" placeholder="Tell us about your project or property needs"></textarea><small class="field-error" id="message-error" aria-live="polite"></small></label>
             <button class="button button-gold magnetic submit-button" type="submit"><span>Preview Consultation Request</span><i>↗</i></button>
             <div class="form-success" id="form-success" role="status" aria-live="polite"><strong>Demo only.</strong><span>No request was sent or stored. Connect a verified form endpoint and contact channel before accepting enquiries.</span></div>
           </form>

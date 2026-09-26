@@ -536,6 +536,7 @@ function initForm() {
   const now = new Date();
   const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split("T")[0];
   date.min = localDate;
+  const errorSummary = $("#form-errors");
 
   const validationMessage = input => {
     const value = input.value.trim();
@@ -550,26 +551,58 @@ function initForm() {
   const validate = input => {
     const message = validationMessage(input);
     const field = input.closest(".field");
+    const error = $(".field-error", field);
     field.classList.toggle("invalid", Boolean(message));
-    $(".field-error", field).textContent = message;
+    error.textContent = message;
     input.setAttribute("aria-invalid", String(Boolean(message)));
+    if (message) input.setAttribute("aria-errormessage", error.id);
+    else input.removeAttribute("aria-errormessage");
     return !message;
   };
 
-  $$('input, select, textarea', form).forEach(input => {
+  const showErrorSummary = invalidFields => {
+    errorSummary.replaceChildren();
+    errorSummary.hidden = invalidFields.length === 0;
+    if (!invalidFields.length) return;
+
+    const heading = document.createElement("strong");
+    heading.textContent = "Please correct the following fields:";
+    const list = document.createElement("ul");
+
+    invalidFields.forEach(input => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      const label = $(".field > span", input.closest(".field"))?.textContent.replace(/\s*\*$/, "") || input.name;
+      link.href = `#${input.id}`;
+      link.textContent = `${label}: ${validationMessage(input)}`;
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        input.focus();
+      });
+      item.append(link);
+      list.append(item);
+    });
+
+    errorSummary.append(heading, list);
+  };
+
+  $('input, select, textarea', form).forEach(input => {
     input.addEventListener("blur", () => validate(input));
     input.addEventListener("input", () => {
       if (input.closest(".field").classList.contains("invalid")) validate(input);
+      errorSummary.hidden = true;
       $("#form-success").classList.remove("show");
     });
   });
 
   form.addEventListener("submit", event => {
     event.preventDefault();
-    const fields = $$('input, select, textarea', form);
-    const valid = fields.map(validate).every(Boolean);
-    if (!valid) {
-      fields.find(input => input.getAttribute("aria-invalid") === "true")?.focus();
+    const fields = $('input, select, textarea', form);
+    fields.forEach(validate);
+    const invalidFields = fields.filter(input => input.getAttribute("aria-invalid") === "true");
+    showErrorSummary(invalidFields);
+    if (invalidFields.length) {
+      errorSummary.focus();
       showToast("Please review the highlighted form fields.");
       return;
     }
@@ -578,8 +611,10 @@ function initForm() {
     $("span", button).textContent = "Previewing details…";
     window.setTimeout(() => {
       form.reset();
+      showErrorSummary([]);
       fields.forEach(input => {
         input.setAttribute("aria-invalid", "false");
+        input.removeAttribute("aria-errormessage");
         input.closest(".field").classList.remove("invalid");
         $(".field-error", input.closest(".field")).textContent = "";
       });
