@@ -54,6 +54,16 @@ test('consultation form exposes accessible validation feedback', async () => {
   assert.match(script, /errorSummary\.focus\(\)/);
 });
 
+test('mobile menu traps keyboard focus and restores it when closed', async () => {
+  const [html, script] = await Promise.all([read('index.html'), read('script.js')]);
+  assert.match(html, /id="mobile-menu" aria-hidden="true" inert/);
+  assert.match(script, /menu\.setAttribute\("aria-hidden", String\(!open\)\)/);
+  assert.match(script, /if \(event\.key !== "Tab"\) return/);
+  assert.match(script, /event\.shiftKey && document\.activeElement === first/);
+  assert.match(script, /document\.activeElement === last/);
+  assert.match(script, /returnFocus\?\.isConnected/);
+});
+
 test('removed listing prototypes cannot silently return without matching markup', async () => {
   const script = await read('script.js');
   for (const obsolete of ['properties-grid', 'property-modal', 'projects-list', 'comparison-range', 'map-grid']) {

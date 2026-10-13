@@ -76,19 +76,46 @@ function initHeaderAndNavigation() {
   const toggle = $("#menu-toggle");
   const closeButton = $("#menu-close");
   const menu = $("#mobile-menu");
+  let returnFocus = null;
+  const getMenuFocusables = () => $$("a[href], button:not([disabled])", menu);
   const setMenu = open => {
+    if (open) returnFocus = document.activeElement;
     menu.classList.toggle("open", open);
     menu.inert = !open;
+    menu.setAttribute("aria-hidden", String(!open));
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     document.body.classList.toggle("menu-open", open);
-    if (open) $("nav a", menu)?.focus();
+    if (open) {
+      getMenuFocusables()[0]?.focus();
+    } else {
+      if (returnFocus?.isConnected) returnFocus.focus();
+      returnFocus = null;
+    }
   };
   toggle.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
   closeButton.addEventListener("click", () => setMenu(false));
   $$("a[href^='#']", menu).forEach(link => link.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && menu.classList.contains("open")) setMenu(false);
+    if (!menu.classList.contains("open")) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setMenu(false);
+      return;
+    }
+    if (event.key !== "Tab") return;
+
+    const focusables = getMenuFocusables();
+    const first = focusables[0];
+    const last = focusables.at(-1);
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   const navLinks = $$(".desktop-nav a");
