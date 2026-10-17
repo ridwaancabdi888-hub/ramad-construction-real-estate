@@ -64,6 +64,14 @@ test('mobile menu traps keyboard focus and restores it when closed', async () =>
   assert.match(script, /returnFocus\?\.isConnected/);
 });
 
+test('continuous animations respect motion and page visibility preferences', async () => {
+  const [script, styles] = await Promise.all([read('script.js'), read('style.css')]);
+  assert.match(script, /coarsePointer \|\| reducedMotion \|\| window\.innerWidth < 900/);
+  assert.match(script, /if \(document\.hidden\) loop\.stop\(\)/);
+  assert.match(script, /else loop\.start\(\)/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.cursor-dot, \.cursor-ring \{ display: none; \}/);
+});
+
 test('removed listing prototypes cannot silently return without matching markup', async () => {
   const script = await read('script.js');
   for (const obsolete of ['properties-grid', 'property-modal', 'projects-list', 'comparison-range', 'map-grid']) {

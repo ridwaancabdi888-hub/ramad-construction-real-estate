@@ -612,6 +612,7 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .cursor-dot, .cursor-ring { display: none; }
   .hero-media img { transform: none; }
   .story { height: auto; }
   .story-pin { height: auto; overflow: visible; }

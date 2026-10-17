@@ -1,4 +1,5 @@
 import * as THREE from "./assets/vendor/three.module.min.js";
+import { createAnimationLoop } from "./animation-loop.mjs";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -157,22 +158,24 @@ function initThreeScene() {
 
     let mouseX = 0;
     let mouseY = 0;
-    let frame;
     window.addEventListener("pointermove", event => {
       mouseX = (event.clientX / window.innerWidth - .5) * .45;
       mouseY = (event.clientY / window.innerHeight - .5) * .28;
     }, { passive: true });
 
-    const render = () => {
-      mesh.rotation.x += .0007;
-      mesh.rotation.y += .0012;
-      mesh.position.x += (3.2 + mouseX - mesh.position.x) * .035;
-      mesh.position.y += (-.2 - mouseY - mesh.position.y) * .035;
-      points.rotation.y -= .00013;
-      renderer.render(scene, camera);
-      frame = requestAnimationFrame(render);
-    };
-    render();
+    const loop = createAnimationLoop({
+      requestFrame: callback => requestAnimationFrame(callback),
+      cancelFrame: frameId => cancelAnimationFrame(frameId),
+      render: () => {
+        mesh.rotation.x += .0007;
+        mesh.rotation.y += .0012;
+        mesh.position.x += (3.2 + mouseX - mesh.position.x) * .035;
+        mesh.position.y += (-.2 - mouseY - mesh.position.y) * .035;
+        points.rotation.y -= .00013;
+        renderer.render(scene, camera);
+      }
+    });
+    loop.start();
 
     const resize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -181,8 +184,8 @@ function initThreeScene() {
     };
     window.addEventListener("resize", resize, { passive: true });
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) cancelAnimationFrame(frame);
-      else render();
+      if (document.hidden) loop.stop();
+      else loop.start();
     });
   } catch {
     canvas.remove();
@@ -431,7 +434,7 @@ function initMagneticButtons() {
 }
 
 function initCursor() {
-  if (coarsePointer || window.innerWidth < 900) return;
+  if (coarsePointer || reducedMotion || window.innerWidth < 900) return;
   const dot = $(".cursor-dot");
   const ring = $(".cursor-ring");
   let pointerX = -100;
@@ -443,13 +446,20 @@ function initCursor() {
     pointerY = event.clientY;
     dot.style.transform = `translate(${pointerX}px, ${pointerY}px) translate(-50%,-50%)`;
   }, { passive: true });
-  const follow = () => {
-    ringX += (pointerX - ringX) * .14;
-    ringY += (pointerY - ringY) * .14;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%,-50%)`;
-    requestAnimationFrame(follow);
-  };
-  follow();
+  const loop = createAnimationLoop({
+    requestFrame: callback => requestAnimationFrame(callback),
+    cancelFrame: frameId => cancelAnimationFrame(frameId),
+    render: () => {
+      ringX += (pointerX - ringX) * .14;
+      ringY += (pointerY - ringY) * .14;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%,-50%)`;
+    }
+  });
+  loop.start();
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) loop.stop();
+    else loop.start();
+  });
   document.addEventListener("pointerover", event => { ring.classList.toggle("viewing", Boolean(event.target.closest("[data-cursor='view']"))); });
 }
 
