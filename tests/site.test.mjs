@@ -54,6 +54,15 @@ test('consultation form exposes accessible validation feedback', async () => {
   assert.match(script, /errorSummary\.focus\(\)/);
 });
 
+test('consultation validation operates on the complete form field collection', async () => {
+  const script = await read('script.js');
+  assert.match(script, /import \{ collectFormFields \} from "\.\/form-fields\.mjs"/);
+  assert.match(script, /const fields = collectFormFields\(form\)/);
+  assert.match(script, /fields\.forEach\(input =>/);
+  assert.match(script, /fields\.filter\(input =>/);
+  assert.doesNotMatch(script, /\$\(['"]input, select, textarea['"], form\)/);
+});
+
 test('mobile menu traps keyboard focus and restores it when closed', async () => {
   const [html, script] = await Promise.all([read('index.html'), read('script.js')]);
   assert.match(html, /id="mobile-menu" aria-hidden="true" inert/);

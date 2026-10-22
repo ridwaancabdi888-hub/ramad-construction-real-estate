@@ -1,5 +1,6 @@
 import * as THREE from "./assets/vendor/three.module.min.js";
 import { createAnimationLoop } from "./animation-loop.mjs";
+import { collectFormFields } from "./form-fields.mjs";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -329,6 +330,7 @@ function initForm() {
   const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split("T")[0];
   date.min = localDate;
   const errorSummary = $("#form-errors");
+  const fields = collectFormFields(form);
 
   const validationMessage = input => {
     const value = input.value.trim();
@@ -378,7 +380,7 @@ function initForm() {
     errorSummary.append(heading, list);
   };
 
-  $('input, select, textarea', form).forEach(input => {
+  fields.forEach(input => {
     input.addEventListener("blur", () => validate(input));
     input.addEventListener("input", () => {
       if (input.closest(".field").classList.contains("invalid")) validate(input);
@@ -389,7 +391,6 @@ function initForm() {
 
   form.addEventListener("submit", event => {
     event.preventDefault();
-    const fields = $('input, select, textarea', form);
     fields.forEach(validate);
     const invalidFields = fields.filter(input => input.getAttribute("aria-invalid") === "true");
     showErrorSummary(invalidFields);
