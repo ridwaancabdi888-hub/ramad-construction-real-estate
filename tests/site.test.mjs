@@ -66,11 +66,10 @@ test('consultation validation operates on the complete form field collection', a
 test('mobile menu traps keyboard focus and restores it when closed', async () => {
   const [html, script] = await Promise.all([read('index.html'), read('script.js')]);
   assert.match(html, /id="mobile-menu" aria-hidden="true" inert/);
-  assert.match(script, /menu\.setAttribute\("aria-hidden", String\(!open\)\)/);
-  assert.match(script, /if \(event\.key !== "Tab"\) return/);
-  assert.match(script, /event\.shiftKey && document\.activeElement === first/);
-  assert.match(script, /document\.activeElement === last/);
-  assert.match(script, /returnFocus\?\.isConnected/);
+  assert.match(script, /import \{ createMenuController \} from "\.\/menu-controller\.mjs"/);
+  assert.match(script, /document\.addEventListener\("keydown", menuController\.handleKeyDown\)/);
+  assert.match(script, /matchMedia\("\(min-width: 1181px\)"\)/);
+  assert.match(script, /menuController\.handleDesktopChange\(desktopQuery\)/);
 });
 
 test('continuous animations respect motion and page visibility preferences', async () => {

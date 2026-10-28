@@ -1,6 +1,7 @@
 import * as THREE from "./assets/vendor/three.module.min.js";
 import { createAnimationLoop } from "./animation-loop.mjs";
 import { collectFormFields } from "./form-fields.mjs";
+import { createMenuController } from "./menu-controller.mjs";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -78,47 +79,22 @@ function initHeaderAndNavigation() {
   const toggle = $("#menu-toggle");
   const closeButton = $("#menu-close");
   const menu = $("#mobile-menu");
-  let returnFocus = null;
   const getMenuFocusables = () => $$("a[href], button:not([disabled])", menu);
-  const setMenu = open => {
-    if (open) returnFocus = document.activeElement;
-    menu.classList.toggle("open", open);
-    menu.inert = !open;
-    menu.setAttribute("aria-hidden", String(!open));
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    document.body.classList.toggle("menu-open", open);
-    if (open) {
-      getMenuFocusables()[0]?.focus();
-    } else {
-      if (returnFocus?.isConnected) returnFocus.focus();
-      returnFocus = null;
-    }
-  };
-  toggle.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
-  closeButton.addEventListener("click", () => setMenu(false));
-  $$("a[href^='#']", menu).forEach(link => link.addEventListener("click", () => setMenu(false)));
-  document.addEventListener("keydown", event => {
-    if (!menu.classList.contains("open")) return;
-    if (event.key === "Escape") {
-      event.preventDefault();
-      setMenu(false);
-      return;
-    }
-    if (event.key !== "Tab") return;
-
-    const focusables = getMenuFocusables();
-    const first = focusables[0];
-    const last = focusables.at(-1);
-    if (!first || !last) return;
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+  const menuController = createMenuController({
+    menu,
+    toggle,
+    body: document.body,
+    getFocusables: getMenuFocusables,
+    getActiveElement: () => document.activeElement,
   });
+  toggle.addEventListener("click", menuController.toggle);
+  closeButton.addEventListener("click", () => menuController.close());
+  $$("a[href^='#']", menu).forEach(link => link.addEventListener("click", () => menuController.close()));
+  document.addEventListener("keydown", menuController.handleKeyDown);
+
+  const desktopQuery = window.matchMedia("(min-width: 1181px)");
+  desktopQuery.addEventListener("change", menuController.handleDesktopChange);
+  menuController.handleDesktopChange(desktopQuery);
 
   const navLinks = $$(".desktop-nav a");
   const trackedSections = navLinks.map(link => $(link.getAttribute("href"))).filter(Boolean);
