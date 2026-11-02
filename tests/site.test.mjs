@@ -81,9 +81,11 @@ test('continuous animations respect motion and page visibility preferences', asy
 });
 
 test('removed listing prototypes cannot silently return without matching markup', async () => {
-  const script = await read('script.js');
+  const [script, styles] = await Promise.all([read('script.js'), read('style.css')]);
   for (const obsolete of ['properties-grid', 'property-modal', 'projects-list', 'comparison-range', 'map-grid']) {
     assert.doesNotMatch(script, new RegExp(obsolete));
+    assert.doesNotMatch(styles, new RegExp(`\\.${obsolete}\\b`));
   }
   assert.doesNotMatch(script, /ramad-favorites/);
+  assert.doesNotMatch(styles, /\.(?:property-card|project-row|comparison-block|modal-shell|whatsapp-button)\b/);
 });
