@@ -89,3 +89,17 @@ test('removed listing prototypes cannot silently return without matching markup'
   assert.doesNotMatch(script, /ramad-favorites/);
   assert.doesNotMatch(styles, /\.(?:property-card|project-row|comparison-block|modal-shell|whatsapp-button)\b/);
 });
+
+test('service links have unique accessible names and match a form option', async () => {
+  const html = await read('index.html');
+  const options = new Set([...html.matchAll(/<option>([^<]+)<\/option>/g)].map(match => match[1]));
+  const links = [...html.matchAll(/<a class="service-link"[^>]*data-service="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)];
+  assert.ok(links.length > 0);
+  const names = links.map(([, , inner]) => inner.replace(/<i aria-hidden="true">[^<]*<\/i>/g, '').replace(/<[^>]+>/g, '').trim());
+  assert.equal(new Set(names).size, names.length, 'service link names must be unique');
+  for (const [, service, inner] of links) {
+    assert.ok(options.has(service), `${service} must be a consultation form option`);
+    assert.ok(inner.includes(service), `link for ${service} must name the service`);
+    assert.match(inner, /<i aria-hidden="true">/);
+  }
+});

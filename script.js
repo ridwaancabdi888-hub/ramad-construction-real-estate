@@ -394,7 +394,17 @@ function initForm() {
     }, 700);
   });
 
-  $$("[data-service]").forEach(link => link.addEventListener("click", () => { $("#service").value = link.dataset.service; }));
+  const serviceSelect = $("#service");
+  $$("[data-service]").forEach(link => link.addEventListener("click", () => {
+    const service = link.dataset.service;
+    if (![...serviceSelect.options].some(option => option.value === service)) return;
+    serviceSelect.value = service;
+    // Clear a stale "required" error left from an earlier submit attempt.
+    if (serviceSelect.closest(".field").classList.contains("invalid")) validate(serviceSelect);
+    errorSummary.hidden = true;
+    $("#form-success").classList.remove("show");
+    showToast(`${service} is selected in the consultation form.`);
+  }));
 }
 
 function initMagneticButtons() {
