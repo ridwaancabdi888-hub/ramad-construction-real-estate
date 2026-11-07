@@ -72,6 +72,14 @@ test('mobile menu traps keyboard focus and restores it when closed', async () =>
   assert.match(script, /menuController\.handleDesktopChange\(desktopQuery\)/);
 });
 
+test('desktop and mobile navigation share an accessible current-section state', async () => {
+  const script = await read('script.js');
+  assert.match(script, /import \{ setCurrentNavigation, uniqueNavigationSections \} from "\.\/navigation-state\.mjs"/);
+  assert.match(script, /\.desktop-nav a, \.mobile-menu nav a/);
+  assert.match(script, /setCurrentNavigation\(navLinks, window\.location\.hash \|\| "#home"\)/);
+  assert.match(script, /if \("IntersectionObserver" in window\)/);
+});
+
 test('continuous animations respect motion and page visibility preferences', async () => {
   const [script, styles] = await Promise.all([read('script.js'), read('style.css')]);
   assert.match(script, /coarsePointer \|\| reducedMotion \|\| window\.innerWidth < 900/);

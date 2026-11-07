@@ -2,6 +2,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 import { createAnimationLoop } from "./animation-loop.mjs";
 import { collectFormFields } from "./form-fields.mjs";
 import { createMenuController } from "./menu-controller.mjs";
+import { setCurrentNavigation, uniqueNavigationSections } from "./navigation-state.mjs";
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -96,14 +97,19 @@ function initHeaderAndNavigation() {
   desktopQuery.addEventListener("change", menuController.handleDesktopChange);
   menuController.handleDesktopChange(desktopQuery);
 
-  const navLinks = $$(".desktop-nav a");
-  const trackedSections = navLinks.map(link => $(link.getAttribute("href"))).filter(Boolean);
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`));
-  }, { rootMargin: "-30% 0px -60%", threshold: [0, .2, .5] });
-  trackedSections.forEach(section => observer.observe(section));
+  const navLinks = $$(".desktop-nav a, .mobile-menu nav a");
+  const trackedSections = uniqueNavigationSections(navLinks, target => $(target));
+  const updateFromHash = () => setCurrentNavigation(navLinks, window.location.hash || "#home");
+  updateFromHash();
+  window.addEventListener("hashchange", updateFromHash);
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setCurrentNavigation(navLinks, `#${visible.target.id}`);
+    }, { rootMargin: "-30% 0px -60%", threshold: [0, .2, .5] });
+    trackedSections.forEach(section => observer.observe(section));
+  }
 }
 
 function initThreeScene() {
