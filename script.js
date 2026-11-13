@@ -1,6 +1,7 @@
 import * as THREE from "./assets/vendor/three.module.min.js";
 import { createAnimationLoop } from "./animation-loop.mjs";
 import { collectFormFields } from "./form-fields.mjs";
+import { createConsultationPreview } from "./consultation-preview.mjs";
 import { createMenuController } from "./menu-controller.mjs";
 import { setCurrentNavigation, uniqueNavigationSections } from "./navigation-state.mjs";
 
@@ -312,7 +313,28 @@ function initForm() {
   const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split("T")[0];
   date.min = localDate;
   const errorSummary = $("#form-errors");
+  const preview = $("#form-success");
+  const previewSummary = $("#consultation-summary");
+  const previewTitle = $("#preview-title");
+  const startOverButton = $("#preview-start-over");
   const fields = collectFormFields(form);
+
+  const hidePreview = () => preview.classList.remove("show");
+
+  const showPreview = formData => {
+    previewSummary.replaceChildren();
+    createConsultationPreview(formData).forEach(({ label, value }) => {
+      const row = document.createElement("div");
+      const term = document.createElement("dt");
+      const description = document.createElement("dd");
+      term.textContent = label;
+      description.textContent = value;
+      row.append(term, description);
+      previewSummary.append(row);
+    });
+    preview.classList.add("show");
+    previewTitle.focus();
+  };
 
   const validationMessage = input => {
     const value = input.value.trim();
@@ -367,7 +389,7 @@ function initForm() {
     input.addEventListener("input", () => {
       if (input.closest(".field").classList.contains("invalid")) validate(input);
       errorSummary.hidden = true;
-      $("#form-success").classList.remove("show");
+      hidePreview();
     });
   });
 
@@ -382,10 +404,10 @@ function initForm() {
       return;
     }
     const button = $(".submit-button", form);
+    const formData = new FormData(form);
     button.disabled = true;
     $("span", button).textContent = "Previewing details…";
     window.setTimeout(() => {
-      form.reset();
       showErrorSummary([]);
       fields.forEach(input => {
         input.setAttribute("aria-invalid", "false");
@@ -395,9 +417,15 @@ function initForm() {
       });
       button.disabled = false;
       $("span", button).textContent = "Preview Consultation Request";
-      $("#form-success").classList.add("show");
-      showToast("Demo preview completed; no request was sent.");
+      showPreview(formData);
+      showToast("Local preview ready; no request was sent.");
     }, 700);
+  });
+
+  startOverButton.addEventListener("click", () => {
+    form.reset();
+    hidePreview();
+    fields[0]?.focus();
   });
 
   $$("[data-service]").forEach(link => link.addEventListener("click", () => { $("#service").value = link.dataset.service; }));

@@ -54,6 +54,17 @@ test('consultation form exposes accessible validation feedback', async () => {
   assert.match(script, /errorSummary\.focus\(\)/);
 });
 
+test('consultation form provides a safe local preview', async () => {
+  const [html, script] = await Promise.all([read('index.html'), read('script.js')]);
+  assert.match(html, /id="form-success" role="region" aria-labelledby="preview-title"/);
+  assert.match(html, /id="consultation-summary"/);
+  assert.match(html, /id="preview-start-over" type="button"/);
+  assert.match(script, /createConsultationPreview\(formData\)/);
+  assert.match(script, /description\.textContent = value/);
+  assert.match(script, /previewTitle\.focus\(\)/);
+  assert.doesNotMatch(script, /form\.reset\(\);[\s\S]{0,300}showPreview\(formData\)/);
+});
+
 test('consultation validation operates on the complete form field collection', async () => {
   const script = await read('script.js');
   assert.match(script, /import \{ collectFormFields \} from "\.\/form-fields\.mjs"/);

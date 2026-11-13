@@ -299,7 +299,12 @@
             <label class="field"><span>Preferred date *</span><input id="preferred-date" name="date" type="date" required aria-describedby="preferred-date-error"><small class="field-error" id="preferred-date-error" aria-live="polite"></small></label>
             <label class="field"><span>Message *</span><textarea id="message" name="message" rows="4" required minlength="12" aria-describedby="message-error" placeholder="Tell us about your project or property needs"></textarea><small class="field-error" id="message-error" aria-live="polite"></small></label>
             <button class="button button-gold magnetic submit-button" type="submit"><span>Preview Consultation Request</span><i>↗</i></button>
-            <div class="form-success" id="form-success" role="status" aria-live="polite"><strong>Demo only.</strong><span>No request was sent or stored. Connect a verified form endpoint and contact channel before accepting enquiries.</span></div>
+            <div class="form-success" id="form-success" role="region" aria-labelledby="preview-title">
+              <strong id="preview-title" tabindex="-1">Your local consultation preview</strong>
+              <span>No request was sent or stored. Review these details, then start over if you need to make changes.</span>
+              <dl class="consultation-summary" id="consultation-summary"></dl>
+              <button class="button button-outline preview-start-over" id="preview-start-over" type="button">Start over</button>
+            </div>
           </form>
 
           <aside class="contact-aside">

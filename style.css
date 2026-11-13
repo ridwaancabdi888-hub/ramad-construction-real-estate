@@ -336,6 +336,11 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .form-success { display: none; gap: 8px; border-left: 2px solid var(--gold); padding: 16px 20px; color: #cfc4b6; background: rgba(255,255,255,.05); }
 .form-success.show { display: grid; }
 .form-success strong { color: var(--gold-light); font-family: var(--serif); font-size: 1.3rem; }
+.consultation-summary { display: grid; gap: 12px; margin: 14px 0 4px; }
+.consultation-summary > div { display: grid; grid-template-columns: minmax(120px,.35fr) 1fr; gap: 14px; border-top: 1px solid var(--white-line); padding-top: 12px; }
+.consultation-summary dt { color: #a99f93; font-size: .63rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.consultation-summary dd { margin: 0; overflow-wrap: anywhere; color: var(--cream); white-space: pre-wrap; }
+.preview-start-over { width: max-content; margin-top: 8px; }
 .contact-aside { display: grid; gap: 24px; }
 .contact-card { border: 1px solid var(--white-line); padding: 35px; }
 .contact-card > p { margin: 25px 0; color: #a99e91; }
